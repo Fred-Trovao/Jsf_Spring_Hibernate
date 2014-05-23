@@ -4,10 +4,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.otv</groupId>
-	<artifactId>OTV_JSF_Spring_Hibernate_Project</artifactId>
+	<artifactId>JSF_Spring_Hibernate</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>OTV_JSF_Spring_Hibernate_Project</name>
+	<name>JSF_Spring_Hibernate</name>
 	<url>http://maven.apache.org</url>
 
 	<repositories>
@@ -95,9 +95,6 @@
 			<version>4.3.5.Final</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>javassist</groupId> <artifactId>javassist</artifactId> 
-			<version>3.12.1.GA</version> </dependency> -->
-
 		<!-- POSTGRES Java Connector library -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -111,18 +108,13 @@
 			<version>1.8.0</version>
 		</dependency>
 
-
 		<!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId> 
 			<version>0.9.1.2</version> </dependency> -->
-
-		<!-- Log4j library <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
-			<version>1.2.17</version> </dependency> <dependency> <groupId>org.testng</groupId> 
-			<artifactId>testng</artifactId> <version>6.8.8</version> </dependency> -->
-
+		
 	</dependencies>
 
 	<build>
-		<finalName>OTV_JSF_Spring_Hibernate_Project</finalName>
+		<finalName>Spring_Hibernate</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

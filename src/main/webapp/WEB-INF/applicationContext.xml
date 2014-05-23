@@ -8,10 +8,14 @@
 		        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		        http://www.springframework.org/schema/context 
 		        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-
+	
+	<!-- Seta anotaçoes para serem usadas pelo Spring -->
 	<context:annotation-config />
+	
+	<!-- Define o pacote onde o Spring vai procurar por beans anotados -->
 	<context:component-scan base-package="com.otv.user.service, com.otv.user.dao"/>
 	
+	<!-- Configuracao do Banco de Dados -->
 	<bean id="DataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
 			<value>java:/comp/env/jdbc/TestDB</value>
@@ -29,7 +33,7 @@
 		<property name="minPoolSize" value="5" /> 
 	</bean> -->
 	
-	<!-- Session Factory Declaration -->
+	<!-- Configuracao do Hibernate -->
 	<bean id="SessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="DataSource" />
 		<property name="annotatedClasses">
@@ -39,16 +43,16 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
 	</bean>
 	
-	<!-- Enable the configuration of transactional behavior based on annotations -->
+	<!-- define que as transaçoes irao ser anotadas -->
     <tx:annotation-driven transaction-manager="txManager"/>
 
-	<!-- Transaction Manager is defined -->
+	<!-- Configuracao do gerente de transacoes do Spring -->
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
        <property name="sessionFactory" ref="SessionFactory"/>
     </bean>
