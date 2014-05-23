@@ -58,6 +58,7 @@ public class UserDAO implements IUserDAO {
 	 */
 	public void deleteUser(User user) {
 		getSessionFactory().getCurrentSession().delete(user);
+		
 	}
 
 	/**
