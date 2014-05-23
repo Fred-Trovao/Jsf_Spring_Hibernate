@@ -2,9 +2,11 @@ package com.otv.user.dao;
 
 import java.util.List;
 
-import com.otv.model.User;
-
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.otv.model.User;
 
 /**
  * 
@@ -16,8 +18,10 @@ import org.hibernate.SessionFactory;
  *
  */
 
+@Repository("userDAO")
 public class UserDAO implements IUserDAO {
 	
+	@Autowired
 	private SessionFactory sessionFactory;
 
 	/**
@@ -43,7 +47,6 @@ public class UserDAO implements IUserDAO {
 	 * 
 	 * @param  User user
 	 */
-	@Override
 	public void addUser(User user) {
 		getSessionFactory().getCurrentSession().save(user);
 	}
@@ -53,7 +56,6 @@ public class UserDAO implements IUserDAO {
 	 * 
 	 * @param  User user
 	 */
-	@Override
 	public void deleteUser(User user) {
 		getSessionFactory().getCurrentSession().delete(user);
 	}
@@ -63,7 +65,6 @@ public class UserDAO implements IUserDAO {
 	 * 
 	 * @param  User user
 	 */
-	@Override
 	public void updateUser(User user) {
 		getSessionFactory().getCurrentSession().update(user);
 	}
@@ -74,7 +75,6 @@ public class UserDAO implements IUserDAO {
 	 * @param  int User Id
 	 * @return User 
 	 */
-	@Override
 	public User getUserById(int id) {
 		List list = getSessionFactory().getCurrentSession()
 											.createQuery("from User where id=?")
@@ -87,7 +87,6 @@ public class UserDAO implements IUserDAO {
 	 * 
 	 * @return List - User list
 	 */
-	@Override
 	public List<User> getUsers() {
 		List list = getSessionFactory().getCurrentSession().createQuery("from User").list();
 		return list;

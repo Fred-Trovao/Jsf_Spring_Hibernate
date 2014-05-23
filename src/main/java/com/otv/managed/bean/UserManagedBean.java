@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.springframework.dao.DataAccessException;
 
@@ -23,7 +24,7 @@ import com.otv.user.service.IUserService;
  *
  */
 @ManagedBean(name="userMB")
-@RequestScoped
+@ViewScoped
 public class UserManagedBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -31,7 +32,7 @@ public class UserManagedBean implements Serializable {
 	private static final String ERROR   = "error";
 	
 	//Spring User Service is injected...
-	@ManagedProperty(value="#{UserService}")
+	@ManagedProperty(value="#{userService}")
 	IUserService userService;
 	
 	List<User> userList;

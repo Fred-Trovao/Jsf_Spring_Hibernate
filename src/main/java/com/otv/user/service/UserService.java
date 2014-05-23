@@ -2,6 +2,8 @@ package com.otv.user.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.otv.model.User;
@@ -17,9 +19,11 @@ import com.otv.user.dao.IUserDAO;
  *
  */
 @Transactional(readOnly = true)
+@Service("userService")
 public class UserService implements IUserService {
 
 	// UserDAO is injected...
+	@Autowired
 	IUserDAO userDAO;
 	
 	/**
@@ -28,7 +32,6 @@ public class UserService implements IUserService {
 	 * @param  User user
 	 */
 	@Transactional(readOnly = false)
-	@Override
 	public void addUser(User user) {
 		getUserDAO().addUser(user);
 	}
@@ -39,7 +42,6 @@ public class UserService implements IUserService {
 	 * @param  User user
 	 */
 	@Transactional(readOnly = false)
-	@Override
 	public void deleteUser(User user) {
 		getUserDAO().deleteUser(user);
 	}
@@ -50,7 +52,6 @@ public class UserService implements IUserService {
 	 * @param  User user
 	 */
 	@Transactional(readOnly = false)
-	@Override
 	public void updateUser(User user) {
 		getUserDAO().updateUser(user);
 	}
@@ -60,7 +61,6 @@ public class UserService implements IUserService {
 	 * 
 	 * @param  int User Id
 	 */
-	@Override
 	public User getUserById(int id) {
 		return getUserDAO().getUserById(id);
 	}
@@ -69,7 +69,6 @@ public class UserService implements IUserService {
 	 * Get User List
 	 * 
 	 */
-	@Override
 	public List<User> getUsers() {	
 		return getUserDAO().getUsers();
 	}
