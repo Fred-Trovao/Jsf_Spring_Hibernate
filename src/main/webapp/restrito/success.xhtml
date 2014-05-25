@@ -23,9 +23,15 @@
 			</p:column>
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="Surname" />
+					<h:outputText value="Login" />
 				</f:facet>
-				<h:outputText value="#{user.surname}" />
+				<h:outputText value="#{user.login}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Senha" />
+				</f:facet>
+				<h:outputText value="#{user.senha}" />
 			</p:column>
 		</p:dataTable>
 	</h:form>

@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Welcome to JSF_Spring_Hibernate_Project</title>
+</h:head>
+<h:body>
+	<h:form id="formLogin" prependId="false" styleClass="forms">
+		<p:messages autoUpdate="true" />
+		<table>
+			<tr>
+				<td>
+					<p:outputLabel
+						value="Login:" for="j_username" />
+				</td>
+				<td>
+					<p:inputText id="j_username"
+						required="true" maxlength="14"
+						requiredMessage="Login obrigatório" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p:outputLabel value="Senha:" for="j_password"/>
+				</td>
+                <td>
+                	<p:password id="j_password" required="true" 
+                                requiredMessage="Informe a senha" />
+				</td>                                
+			</tr>
+			<tr>
+				<td colspan="2">
+					<p:commandButton value="Entrar" immediate="true" actionListener="#{loginMB.login()}" ajax="false"  icon="ui-icon-check" />
+				</td>
+			</tr>
+		</table>
+	</h:form>
+</h:body>
+</html>

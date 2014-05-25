@@ -7,17 +7,8 @@
      <h:form>      
 	     <table> 
 		     <tr>
-		     	<td><h:outputLabel for="id" value="Id : " /></td>
-		     	<td><p:inputText id="id" value="#{userMB.id}">
-		     			<f:converter converterId="javax.faces.Integer"/>
-		     		    <p:ajax event="blur" update="idMsg" />
-		     		</p:inputText>
-		     		<p:message id="idMsg" for="id" display="icon"/> 
-		     	</td>
-		     </tr>
-		     <tr>
 		     	<td><h:outputLabel for="name" value="Name : " /></td>
-		     	<td><p:inputText id="name" value="#{userMB.name}">
+		     	<td><p:inputText id="name" value="#{userMB.usuario.name}">
 		     			<f:validateLength minimum="5" /> 
 		     			<p:ajax event="blur" update="nameMsg" />
 		     		</p:inputText>
@@ -25,14 +16,22 @@
 		     	</td>
 		     </tr>
 		     <tr>
-		     	<td><h:outputLabel for="surname" value="Surname : " /></td>   
-		     	<td><p:inputText id="surname" value="#{userMB.surname}"> 
+		     	<td><h:outputLabel for="login" value="Login : " /></td>   
+		     	<td><p:inputText id="login" value="#{userMB.usuario.login}"> 
 		     			<f:validateLength minimum="5" /> 
-		     			<p:ajax event="blur" update="surnameMsg" />  
+		     			<p:ajax event="blur" update="loginMsg" />  
 		     		</p:inputText>
-		     		<p:message id="surnameMsg" for="surname" display="icon"/> 
+		     		<p:message id="loginMsg" for="login" display="icon"/> 
 		     	</td>    
-		     </tr>            
+		     </tr>
+		     <tr>
+		     	<td><h:outputLabel for="senha" value="Senha : " /></td>
+		     	<td><p:inputText id="senha" value="#{userMB.usuario.senha}">
+		     		    <p:ajax event="blur" update="idSenha" />
+		     		</p:inputText>
+		     		<p:message id="idSenha" for="senha" display="icon"/> 
+		     	</td>
+		     </tr>         
 	         <tr>
 		     	<td><p:commandButton id="addUser" value="Add" action="#{userMB.addUser}" ajax="false"/></td>
 		     	<td><p:commandButton id="reset" value="Reset" action="#{userMB.reset}" ajax="false"/></td>

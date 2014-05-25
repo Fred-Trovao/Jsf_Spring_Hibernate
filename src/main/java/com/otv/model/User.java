@@ -1,91 +1,106 @@
 package com.otv.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * 
- * User Entity
- * 
- * @author onlinetechvision.com
- * @since 25 Mar 2012
- * @version 1.0.0
- *
- */
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 @Entity
 @Table(name="usuario")
-public class User {
+public class User implements Serializable{
 
-	private int id;
-	private String name;
-	private String surname;
-	
 	/**
-	 * Get User Id
 	 * 
-	 * @return int - User Id
 	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@Column(name="ID", unique = true, nullable = false)
-	public int getId() {
+	@GeneratedValue
+	@Column(unique = true, nullable = false)
+	private Integer id;
+	
+	@Column(nullable = false)
+	private String name;
+	
+	@Column(unique = true, nullable = false)
+	private String login;
+	
+	@Column(nullable = false)
+	private String senha;
+	
+	@Column(nullable = false)
+	private boolean ativo;
+	
+	@ElementCollection(targetClass = String.class)
+	@JoinTable(
+			name = "usuario_permissao",
+			uniqueConstraints ={@UniqueConstraint(columnNames = {"usuario","permissao"})},
+			joinColumns = @JoinColumn(name = "usuario"))
+	@Column(name = "permissao", length=50)
+	private Set<String> permissao = new HashSet<String>();
+
+	public Integer getId() {
 		return id;
 	}
-	
-	/**
-	 * Set User Id
-	 * 
-	 * @param int - User Id
-	 */
-	public void setId(int id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	/**
-	 * Get User Name
-	 * 
-	 * @return String - User Name
-	 */
-	@Column(name="NAME", unique = true, nullable = false)
+
 	public String getName() {
 		return name;
 	}
-	
-	/**
-	 * Set User Name
-	 * 
-	 * @param String - User Name
-	 */
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	/**
-	 * Get User Surname
-	 * 
-	 * @return String - User Surname
-	 */
-	@Column(name="SURNAME", unique = true, nullable = false)
-	public String getSurname() {
-		return surname;
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public Set<String> getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Set<String> permissao) {
+		this.permissao = permissao;
 	}
 	
-	/**
-	 * Set User Surname
-	 * 
-	 * @param String - User Surname
-	 */
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}	
+	public void addPermissao(String permissao){
+		this.permissao.add(permissao);
+	}
 	
-	@Override
-	public String toString() {
-		StringBuffer strBuff = new StringBuffer();
-		strBuff.append("id : ").append(getId());
-		strBuff.append(", name : ").append(getName());
-		strBuff.append(", surname : ").append(getSurname());
-		return strBuff.toString();
+	public void removePermissao(String permissao){
+		this.permissao.remove(permissao);
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 }

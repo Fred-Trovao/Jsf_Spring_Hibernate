@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
 import org.springframework.dao.DataAccessException;
@@ -14,20 +13,14 @@ import org.springframework.dao.DataAccessException;
 import com.otv.model.User;
 import com.otv.user.service.IUserService;
 
-/**
- * 
- * User Managed Bean
- * 
- * @author onlinetechvision.com
- * @since 25 Mar 2012
- * @version 1.0.0
- *
- */
 @ManagedBean(name="userMB")
 @ViewScoped
-public class UserManagedBean implements Serializable {
+public class UserManagedBean implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -962730706537483101L;
 	private static final String SUCCESS = "success";
 	private static final String ERROR   = "error";
 	
@@ -37,22 +30,17 @@ public class UserManagedBean implements Serializable {
 	
 	List<User> userList;
 	
-	private int id;
-	private String name;
-	private String surname;
+	private User usuario;
 	
-	/**
-	 * Add User
-	 * 
-	 * @return String - Response Message
-	 */
+	public UserManagedBean(){
+		this.usuario = new User();
+	}
+	
 	public String addUser() {
 		try {
-			User user = new User();
-			user.setId(getId());
-			user.setName(getName());
-			user.setSurname(getSurname());
-			getUserService().addUser(user);
+			usuario.addPermissao("ROLE_USUARIO");
+			usuario.setAtivo(true);
+			getUserService().addUser(usuario);
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -66,101 +54,32 @@ public class UserManagedBean implements Serializable {
 	 * 
 	 */
 	public void reset() {
-		this.setId(0);
-		this.setName("");
-		this.setSurname("");
+		this.usuario = new User();
 	}
 	
-	/**
-	 * Get User List
-	 * 
-	 * @return List - User List
-	 */
 	public List<User> getUserList() {
 		userList = new ArrayList<User>();
 		userList.addAll(getUserService().getUsers());
 		return userList;
 	}
-	
-	/**
-	 * Get User Service
-	 * 
-	 * @return IUserService - User Service
-	 */
+
 	public IUserService getUserService() {
 		return userService;
 	}
 
-	/**
-	 * Set User Service
-	 * 
-	 * @param IUserService - User Service
-	 */
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
-	
-	/**
-	 * Set User List
-	 * 
-	 * @param List - User List
-	 */
+
+	public User getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
+	}
+
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
 	}
-	
-	/**
-	 * Get User Id
-	 * 
-	 * @return int - User Id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * Set User Id
-	 * 
-	 * @param int - User Id
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * Get User Name
-	 * 
-	 * @return String - User Name
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * Set User Name
-	 * 
-	 * @param String - User Name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	/**
-	 * Get User Surname
-	 * 
-	 * @return String - User Surname
-	 */
-	public String getSurname() {
-		return surname;
-	}
-	
-	/**
-	 * Set User Surname
-	 * 
-	 * @param String - User Surname
-	 */
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-	
 }
